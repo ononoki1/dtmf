@@ -1,0 +1,784 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+
+/* ============================================
+ * ============ TYPORA lATEX THEME ============
+ * ============================================
+ * This project is based on the work of yfzhao20 and du33169,
+   whose repositories are addressed on
+   <https://github.com/yfzhao20/Typora-markdown> and
+   <https://github.com/du33169/typora-theme-essay_cn>,
+   many thanks to them.
+ * Typora LaTeX Theme (Markdown LaTeX Theme)
+   is a CSS theme mainly used as a component of Typora,
+   which is designed for Chinese university students
+   used in LaTeX-styled essays and reports.
+ * Copyright (C) 2021 Keldos;
+ * Repository Address: <https://github.com/Keldos-Li/typora-latex-theme>;
+ * Licensed Under GPL v3.0, SEE <https://github.com/Keldos-Li/typora-latex-theme/blob/main/LICENSE>
+ */
+/* As a special exception, you may create a larger work
+   that contains part or all of the Typora LaTeX Theme
+   and distribute that work under terms of your choice,
+   so long as that work isn't itself a CSS theme
+   or can be processed into CSS theme by using some
+   CSS pre-processors like SASS. Alternatively, if you
+   modify or redistribute this CSS theme itself,
+   you may (at your option) remove this special exception,
+   which will cause the CSS theme and the resulting output files
+   to be licensed under the GNU General Public License
+   without this special exception.
+ */
+:root {
+  /* == 字体设置 == */
+  /* 基准字体 */
+  /* 备选：Times, "Times New Roman" */
+  --base-Latin-font: "Latin Modern Roman", "Latin Modern Roman 10";
+  --base-Chinese-font: "宋体-简", "华文宋体", "Noto Serif CJK SC";
+  --base-font-size: 9.5pt;
+  /* 引言字体 */
+  --quote-font: "Latin Modern Roman", "Latin Modern Roman 10", Times,
+    "Times New Roman", "华文仿宋";
+  /* 这里字体用了10pt,比正文字体稍大 */
+  --quote-font-size: 10pt;
+  /* 代码字体（代码中的中文会调用 ui-font） */
+  --code-font: "Latin Modern Mono", "Latin Modern Mono 10", "Courier New";
+  /* 侧边栏字体 */
+  --ui-font: "阿里巴巴普惠体 2.0", "微软雅黑";
+  /* source mode 字体 */
+  /* 默认调用 code-font 和 ui-font */
+  --sourceMode-font: "SF Mono", "阿里巴巴普惠体 2.0", "微软雅黑";
+  /* 目录字体 */
+  /* 默认调用 base-font */
+  --toc-font: "";
+  /* 默认调用 base-font-size */
+  --toc-font-size: "";
+  /* 表格字体 */
+  /* 默认调用 heading-font */
+  --table-title-font: "";
+  /* 默认调用 base-font */
+  --table-font: "";
+  /* 标题字体（总设置） */
+  --heading-Latin-font: var(--base-Latin-font);
+  --heading-Chinese-font: "华文黑体";
+  /* 标题字体分别设置 */
+  /* 大标题（h1）字体 */
+  --title-Chinese-font: "华文黑体";
+  --title-font-size: 18pt;
+  /* h2字体 */
+  --h2-Chinese-font: "华文黑体";
+  --h2-font-size: 14pt;
+  /* h3字体 */
+  --h3-Chinese-font: "华文黑体";
+  --h3-font-size: 12pt;
+  /* h4字体 */
+  --h4-Chinese-font: "华文楷体";
+  --h4-font-size: 10pt;
+  /* h5字体 */
+  --h5-Chinese-font: "华文仿宋";
+  --h5-font-size: 10pt;
+  /* h6字体 */
+  --h6-Chinese-font: "华文仿宋";
+  --h6-font-size: 9.5pt;
+  /* 粗体样式设置 */
+  /* 加粗风格时使用的字重；400等同于 normal，700等同于 bold，900等同于 heavy */
+  --strong-weight: 900;
+  /* 基础行距 */
+  --base-line-height: 16pt;
+  /* == 页面设置 == */
+  /* 打印页边距 */
+  --set-margin: 1.8cm 2cm 1.2cm 2cm !important;
+  /* == 控制设置 == */
+  /* 目录中是否显示一级标题 */
+  --toc-show-title: none;
+  /* == 颜色设置 == */
+  /* 超链接颜色 */
+  --link-color-light: #2E67D3;
+  --link-color-dark: #8bb1f9;
+}
+
+/* ========== VERY IMPORTANT 请注意看下面的几行: ================
+   如果您需要在输出PDF时隐藏超链接的颜色和下划线，请取消注释下面的代码块，即删去下面的 Ln.1 和 Ln.2
+   如果您需要在输出PDF时保持超链接的显示效果，则不用更改 ============= */
+/* 如要取消注释代码，请把本行删去 Ln.1
+
+@media print {
+  #write a {
+    color: inherit !important;
+    text-decoration: none;
+  } 
+}
+
+如要取消注释代码，请把本行删去 Ln.2 */
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: var(--base-line-height);
+  /* counter-reset: tableHead 0 imgHead 0; */
+}
+
+strong {
+  font-weight: var(--strong-weight);
+}
+
+@media screen {
+  #write {
+    padding: var(--set-margin);
+    /* 添加一个淡蓝色的边框 */
+    /* border: 0.8px solid #AAC ; */
+    /* 页边阴影 */
+    box-shadow: 0 0 24px 12px #cccccc;
+  }
+}
+@media print {
+  #write {
+    padding: 0 !important;
+  }
+
+  @page {
+    margin: 1.8cm 2cm 1.2cm 2cm !important;
+    /* 页边距 */
+  }
+}
+/* 正文区基本属性 */
+#write {
+  font-family: var(--base-Latin-font), var(--base-Chinese-font), serif;
+  font-size: var(--base-font-size);
+  /* A4标准宽度 */
+  max-width: 21cm;
+  background-color: white;
+  /* column-count: 2;
+    column-gap: 25px;
+    column-width: 8cm; 
+    display: inline-block; */
+  /* 这里可以试分栏的，但确实不适合实现 */
+  counter-reset: h2 0 h3 0 h4 0 h5 0 h6 0;
+}
+#write p {
+  text-align: left;
+}
+#write a {
+  color: var(--link-color-light);
+}
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+  font-weight: bold;
+  /* 标题字体 */
+  font-family: var(--heading-Latin-font), var(--heading-Chinese-font), sans-serif;
+  page-break-after: avoid !important;
+}
+#write h1 {
+  font-family: var(--heading-Latin-font), var(--title-Chinese-font), sans-serif;
+  text-align: center;
+  column-span: all;
+  font-size: var(--title-font-size);
+}
+#write h2 {
+  font-family: var(--heading-Latin-font), var(--h2-Chinese-font), sans-serif;
+  font-size: var(--h2-font-size);
+}
+#write h3 {
+  font-family: var(--heading-Latin-font), var(--h3-Chinese-font), sans-serif;
+  font-size: var(--h3-font-size);
+  line-height: var(--h3-font-size);
+}
+#write h4 {
+  font-family: var(--heading-Latin-font), var(--h4-Chinese-font), sans-serif;
+  font-size: var(--h4-font-size);
+  line-height: var(--h4-font-size);
+}
+#write h5 {
+  font-family: var(--heading-Latin-font), var(--h5-Chinese-font), sans-serif;
+  font-size: var(--h5-font-size);
+  line-height: var(--h5-font-size);
+}
+#write h6 {
+  font-family: var(--heading-Latin-font), var(--h6-Chinese-font), sans-serif;
+  font-size: var(--h6-font-size);
+  /* 没有写错，为了避免行距太小才这么写 */
+  line-height: var(--h5-font-size);
+}
+#write table {
+  /* 三线表第一条线宽度 */
+  border-top: 1.2pt solid;
+  /* 三线表第二条线宽度 */
+  border-bottom: 1.2pt solid;
+  font-family: var(--table-font), var(--base-Latin-font), var(--base-Chinese-font), serif;
+  /* font-size: var(--base-font-size); */
+  text-align: center;
+  page-break-inside: avoid;
+  border-spacing: 6px;
+  /* 自动布局表格宽度，如果有时内容太紧建议直接加空格吧，我自己看不惯和页面等宽的大表格 */
+  width: auto;
+  /* 使表格默认居中；虽然这个代码不好，但好像没别的实现办法 */
+  margin: 0 auto;
+}
+#write table td {
+  padding: 2px;
+}
+#write table tr {
+  padding: 2px;
+}
+#write th {
+  padding: 0px 6px;
+}
+#write thead {
+  /* 表格标题（首行）样式 */
+  /* 三线表表头的线 */
+  border-bottom: 0.5pt solid;
+  font-family: var(--table-title-font), var(--heading-Latin-font), var(--heading-Chinese-font), serif !important;
+  /* font-size: var(--base-font-size); */
+  font-weight: var(--strong-weight);
+}
+#write .CodeMirror-wrap {
+  padding: 10px;
+}
+#write .CodeMirror-code pre {
+  font-family: var(--code-font), var(--ui-font), monospace;
+}
+#write h1 {
+  counter-reset: h2;
+}
+#write h2 {
+  counter-reset: h3;
+}
+#write h3 {
+  counter-reset: h4;
+}
+#write h4 {
+  counter-reset: h5;
+}
+#write h5 {
+  counter-reset: h6;
+}
+
+/*
+#write figure:after{
+  counter-increment: tableHead;
+  content: "表" counter(tableHead) " ";
+  text-align:center;
+  width:100%;
+  display:inline-block;
+}*/
+/* 图片，导出PDF时暂时无法显示 */
+/*
+#write .md-image:after{
+  counter-increment: imgHead;
+  content: "图" counter(imgHead) " ";
+  text-align:center;
+  width:100%;
+  display:inline-block;
+}
+*/
+/* basic 样式采用一般的引言，具有左边框、左缩进 */
+blockquote {
+  font-style: normal;
+  font-family: var(--quote-font), var(--base-Latin-font), var(--base-Chinese-font), -apple-system, serif;
+  font-size: var(--quote-font-size);
+  /* 文字离左边框的距离 */
+  padding-left: 16px;
+  padding-right: 20pt;
+  /* 左边框离页面边的距离 */
+  margin-left: 20px;
+}
+
+hr {
+  border-top: solid 0.7px #eee;
+}
+
+img {
+  /* 避免图片在导出时被断开 */
+  page-break-inside: avoid;
+}
+
+/* ============ 多级列表样式 ============ */
+ul {
+  /* 无序列表第一级：实心圆点 */
+  list-style: disc;
+}
+ul ul {
+  /*list-style: circle;*/
+  /* 请勿删除“–”后的空格, 他们对缩进有一定影响, 下同 */
+  list-style: "–　 ";
+  /*left: -0.8rem;*/
+}
+ul ul ul {
+  /* 无序列表第三极：小圈 */
+  list-style: "◦　";
+  left: 0.1rem;
+}
+
+ol {
+  /* 有序列表第一级：数字 */
+  list-style: decimal;
+}
+ol ol {
+  counter-reset: liist;
+  list-style: none;
+}
+ol ol li {
+  counter-increment: liist;
+  position: relative;
+}
+ol ol li::before {
+  /* 有序列表第二级：括号加小写字母 */
+  content: "(" counter(liist,lower-alpha) ")　　";
+  position: absolute;
+  margin-right: 2rem;
+  left: -2.4rem;
+}
+ol ol ol {
+  counter-reset: liiist;
+  list-style: none;
+  margin: 0;
+}
+ol ol ol li {
+  counter-increment: liiist;
+  position: relative;
+}
+ol ol ol li::before {
+  /* 有序列表第三级：小写罗马数字 */
+  content: counter(liiist,lower-roman) ".　　";
+  align-self: flex-end;
+  position: absolute;
+  left: -3rem;
+  /* -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;*/
+  /* 为了让项目编号是重新用句点对齐而不是左对齐 */
+  width: 4.2rem;
+  text-align: right;
+}
+
+li {
+  position: relative;
+}
+
+/* ============ 多级列表样式END ============ */
+/* 行内代码 */
+code {
+  font-family: var(--code-font), var(--ui-font), monospace;
+}
+
+h1 code, h2 code, h3 code, h4 code, h5 code, h6 code,
+p code,
+li code {
+  color: #3c70c6;
+  background-color: #fefefe;
+  /* 阴影 */
+  box-shadow: 0 0 1px 1px #c8d3df;
+  font-family: var(--code-font), var(--ui-font), monospace;
+  box-sizing: border-box;
+  border-right: 0px;
+  margin: 0 2px 0 2px;
+  padding: 0 2px 0 2px;
+  /* 圆角 */
+  border-radius: 2px 2px 2px 2px;
+}
+
+/* typora 编写模式 */
+#typora-source {
+  font-family: var(--sourceMode-font), var(--code-font), var(--ui-font), monospace;
+  line-height: 2rem;
+}
+
+#write h2:before {
+  counter-increment: h2;
+  content: counter(h2);
+  margin-right: 2rem;
+}
+
+#write h3:before, h3.md-focus.md-heading:before {
+  counter-increment: h3;
+  content: counter(h2) "." counter(h3);
+  margin-right: 2rem;
+}
+
+#write h4:before, h4.md-focus.md-heading:before {
+  counter-increment: h4;
+  content: counter(h2) "." counter(h3) "." counter(h4);
+  margin-right: 2rem;
+}
+
+#write h5:before, h5.md-focus.md-heading:before {
+  counter-increment: h5;
+  content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5);
+  margin-right: 2rem;
+}
+
+#write h6:before, h6.md-focus.md-heading:before {
+  counter-increment: h6;
+  content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6);
+  margin-right: 2rem;
+}
+
+.footnotes-area .footnote-line {
+  color: var(--text-color);
+  font-size: var(--base-font-size);
+}
+.footnotes-area hr {
+  border: 0;
+  color: #00000000;
+}
+
+/* 目录 */
+.md-toc-content {
+  margin-left: 2em;
+  /* 修复缺失上级标题时无法递增 */
+  counter-reset: toc-h2 toc-h3 toc-h4;
+  page-break-after: always;
+}
+
+.md-toc-inner {
+  margin-left: 0 !important;
+  color: var(--text-color) !important;
+}
+
+.md-toc-item {
+  color: var(--text-color) !important;
+}
+
+/* 目录标题内容属性 */
+.md-toc-h2,
+.md-toc-h3,
+.md-toc-h4,
+.md-toc-h5,
+.md-toc-h6 {
+  font-size: var(--toc-font-size);
+  font-family: var(--toc-font), var(--base-Latin-font), var(--base-Chinese-font), serif;
+}
+
+.md-toc-h2 {
+  font-weight: var(--strong-weight);
+}
+
+/* 目录标题前 */
+.md-toc-content .md-toc-h1 {
+  display: var(--toc-show-title);
+  counter-reset: toc-h2;
+}
+.md-toc-content .md-toc-h2 {
+  counter-reset: toc-h3;
+}
+.md-toc-content .md-toc-h3 {
+  counter-reset: toc-h4;
+}
+.md-toc-content .md-toc-h4 {
+  counter-reset: toc-h5;
+}
+.md-toc-content .md-toc-h5 {
+  counter-reset: toc-h6;
+}
+.md-toc-content .md-toc-h2:before {
+  counter-increment: toc-h2;
+  content: counter(toc-h2);
+  margin-right: 1rem;
+  font-weight: var(--strong-weight);
+}
+.md-toc-content .md-toc-h3:before {
+  counter-increment: toc-h3;
+  content: counter(toc-h2) "." counter(toc-h3);
+  margin-left: 1.5rem;
+  margin-right: 0.5rem;
+}
+.md-toc-content .md-toc-h4:before {
+  counter-increment: toc-h4;
+  content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4);
+  margin-left: 3.5rem;
+  margin-right: 0.5rem;
+}
+.md-toc-content .md-toc-h5:before {
+  counter-increment: toc-h5;
+  content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) "." counter(toc-h5);
+  margin-left: 5.5rem;
+  margin-right: 0.5rem;
+}
+.md-toc-content .md-toc-h6:before {
+  counter-increment: toc-h6;
+  content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) "." counter(toc-h5) "." counter(toc-h6);
+  margin-left: 7.5rem;
+  margin-right: 0.5rem;
+}
+
+/* 侧边大纲标题 */
+.sidebar-content .outline-h1 {
+  counter-reset: outline-h2;
+}
+.sidebar-content .outline-h2 {
+  counter-reset: outline-h3;
+}
+.sidebar-content .outline-h2 .outline-label:before {
+  counter-increment: outline-h2;
+  content: counter(outline-h2) " ";
+}
+.sidebar-content .outline-h3 {
+  counter-reset: outline-h4;
+}
+.sidebar-content .outline-h3 .outline-label:before {
+  counter-increment: outline-h3;
+  content: counter(outline-h2) "." counter(outline-h3) "  ";
+}
+.sidebar-content .outline-h4 {
+  counter-reset: outline-h5;
+}
+.sidebar-content .outline-h4 .outline-label:before {
+  counter-increment: outline-h4;
+  content: counter(outline-h2) "." counter(outline-h3) "." counter(outline-h4) "  ";
+}
+.sidebar-content .outline-h5 {
+  counter-reset: outline-h6;
+}
+.sidebar-content .outline-h5 .outline-label:before {
+  counter-increment: outline-h5;
+  content: counter(outline-h2) "." counter(outline-h3) "." counter(outline-h4) "." counter(outline-h5) "  ";
+}
+
+.sidebar-content {
+  /* 侧边栏的字体修改 */
+  font-family: var(--ui-font);
+  list-style: none;
+}
+
+/* 元数据（如 YAML front matter）的背景框 */
+pre.md-meta-block {
+  background: #cccccc;
+  padding: 1.4em;
+  font-family: var(--code-font), var(--ui-font), monospace;
+}
+
+#write > h3.md-focus:before,
+#write > h4.md-focus:before,
+#write > h5.md-focus:before,
+#write > h6.md-focus:before,
+h3.md-focus:before,
+h4.md-focus:before,
+h5.md-focus:before,
+h6.md-focus:before {
+  color: inherit;
+  border: inherit;
+  border-radius: inherit;
+  position: inherit;
+  left: initial;
+  float: none;
+  top: initial;
+  font-size: inherit;
+  padding-left: inherit;
+  padding-right: inherit;
+  vertical-align: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+
+
+</style><title>document</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='matlab-大作业'><span>Matlab 大作业</span></h1><p><span>注：</span></p><ol start='' ><li><span>由于担心中文乱码，代码的注释及输出均使用英文。</span></li><li><span>详细的代码说明见注释，这里只给出简述。</span></li></ol><h2 id='完成情况及功能简介'><span>完成情况及功能简介</span></h2><p><span>PDF 中要求的功能全部完成，列举如下：</span></p><ol start='' ><li><span>使用 GUI（具体使用 App Designer）</span></li><li><span>支持直接输入或按键输入字符串</span></li><li><span>输入有合法性检查（作了适当修改，见扩展功能 1），并支持重新输入</span></li><li><span>即时画出时域波形，并支持随时播放（作了适当修改，见扩展功能 2）</span></li><li><span>支持储存 DTMF 信号，使用 struct</span></li><li><span>支持检测程序生成的或外部文件读取的 DTMF 信号并转化为相应字符串</span></li><li><span>支持检测随机静音时长和随机幅度的 DTMF 信号</span></li><li><span>即时画出输入信号的时域波形，并支持点击时取出 30ms 画出幅度谱（作了适当修改，见扩展功能 8、9）</span></li><li><span>有菜单栏，其中有关于和帮助</span></li></ol><p><span>此外，有以下扩展功能：</span></p><ol start='' ><li><span>允许输入字符串包含小写字母 abcd，并视作相应大写字母 ABCD 处理，同时弹窗警告</span></li><li><span>通过按键输入字符串时，为了模拟传统座机的拨号特点，每按一个键将发出这一按键对应的 DTMF 信号声音，直接输入时不发音</span></li><li><span>储存 DTMF 信号时支持指定幅度，并且可以为负值；为了避免调用 audiowrite 函数写入时音频被裁剪，幅度范围为 [-1, 0)U(0, 1]，默认值为 1</span></li><li><span>储存及读取文件时使用操作系统的文件选择对话框，且支持错误检测</span></li><li><span>读取 DTMF 信号时，若程序并无生成的信号，则只能选择检测外部文件</span></li><li><span>读取 DTMF 信号时，如果转化的字符串过长，则弹窗显示完整字符串，避免因主窗口大小不够导致无法显示完全</span></li><li><span>支持检测随机声音时长和任意采样率的 DTMF 信号</span></li><li><span>当用户点击输入信号的时域波形时，即使没有点击到波形上，也视作点击到了点击处的 X 坐标所对应的波形上的点，并即时显示此点的 X 和 Y 坐标；但当用户点击到静音区域或坐标系以外区域时忽略这一点击</span></li><li><span>当用户点击的地方距静音部分不足 30ms 时，支持自动调整取出范围；当输入信号本身的时长不足 30ms 时，支持自动调整取出范围为整段并弹窗警告</span></li><li><span>增加 perfect 模式选项，启用后将取整段非静音连续片段作为幅度谱的相应时域数据（而非定值 30ms），大幅提高精确度</span></li><li><span>所有 error 及 warning 均为弹窗提示，且在左上角标有状态码，可按照本文第六部分查询详情</span></li></ol><h2 id='代码简述'><span>代码简述</span></h2><p><span>以上功能由以下代码特点驱动：</span></p><ol start='' ><li><span>使用了多个 App，</span><code>dtmf.mlapp</code><span>是主程序，其余以</span><code>sub</code><span>开头的文件是子程序</span></li><li><span>当存在特定子窗口（如 subLoad/subSave/subError/subWarning/subStr）时，冻结父窗口（将部分具有交互性的控件 disable）以防止用户不按程序逻辑操作；当子窗口关闭时，恢复父窗口的交互性</span></li><li><span>充分发挥 Label Text 属性以减少 error/warning 的 App 数量</span></li><li><span>尽可能多地考虑例外情况，以至于几乎不会产生意料之外的 error/warning（至少我测试的过程中是这样）</span></li></ol><p><span>给出代码的变量/方法/文件/控件命名规范以便老师更容易看懂代码：</span></p><p><span>变量命名：</span></p><ul><li><span>一般规则：首单词小写，其余单词仅首字母大写，单词间无字符，如</span><code>hasSub</code></li><li><span>例外：窗口句柄变量，首单词首字母也大写，如</span><code>SubLoad</code></li></ul><p><span>方法及文件命名：</span></p><ul><li><span>首单词小写，其余单词仅首字母大写，单词间无字符，如</span><code>checkStrInput</code><span>和</span><code>subAbout</code></li></ul><p><span>控件命名：</span></p><ul><li><span>所有单词首字母大写，单词间无字符，如</span><code>StrShow</code></li><li><span>窗口控件以文件名命名，如</span><code>subSave</code><span>文件的窗口名为</span><code>Save</code></li><li><span>若其他控件命名与窗口控件冲突，以窗口控件优先，如</span><code>subSave</code><span>文件的</span><code>Save</code><span>按钮名称为</span><code>SaveButton</code></li></ul><div style="page-break-after: always;"></div><h2 id='程序框图'><span>程序框图</span></h2><p><img src="pic/程序框图.png" referrerpolicy="no-referrer" alt="程序框图"></p><div style="page-break-after: always;"></div><h2 id='运行说明'><span>运行说明</span></h2><p><span>请确保压缩包内的所有文件均已解压缩且它们的相对位置保持不变，否则程序可能无法正常运行。</span></p><p><code>dtmf.mlapp</code><span>是主程序，请运行它。</span></p><p><span>程序的界面设计很友好，应当不需要太多说明。这里仅做简介。</span></p><p><span>主程序界面左上方为生成信号的时域波形，右上方为检测信号的时域波形，右下方为检测信号的幅度谱，左下方为用户输入部分，分为直接输入（有</span><code>String Input:</code><span>提示）和按键输入。按键布局完全复刻 PDF 中的 </span><code>DTMF 信号简介</code><span>部分。右侧按键自上而下分别为 perfect 模式、播放与保存。下方是检测 DTMF 信号的按键和检测出的字符串（有</span><code>Loaded String:</code><span>提示）。</span></p><p><span>点击</span><code>Load</code><span>按键，打开</span><code>subLoad</code><span>子程序，主程序被冻结（所有按键及输入框均无法交互）。当主程序有生成的 DTMF 信号时，默认选中</span><code>Use generated audio</code><span>，否则此项不可交互，默认选中</span><code>Use external audio</code><span>且显示文件位置输入框。点击此窗口的</span><code>Load</code><span>按键，若无异常，将载入所选信号并关闭这一窗口，主窗口恢复交互性，否则弹窗提示 error，并要求重新输入。</span></p><p><span>点击</span><code>Save</code><span>按键，当主程序没有生成的 DTMF 信号时，提示 error，否则打开</span><code>subSave</code><span>子程序，主程序被冻结（所有按键及输入框均无法交互）。默认不勾选</span><code>Also save .wav file</code><span>选项，若勾选，则显示 .wav 文件位置输入框。点击此窗口的</span><code>Save</code><span>按键，若无异常，将保存生成信号到指定位置并关闭这一窗口，主窗口恢复交互性，否则弹窗提示 error，并要求重新输入。</span></p><div style="page-break-after: always;"></div><h2 id='运行结果展示'><span>运行结果展示</span></h2><p><span>初始界面：</span></p><p><img src="pic/1.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>正常输入字符串后：</span></p><p><img src="pic/2.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>保存界面：</span></p><p><img src="pic/3.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>载入界面：</span></p><p><img src="pic/4.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>正常载入后：</span></p><p><img src="pic/5.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>有效单击载入音频的时域波形后（非 perfect 模式）：</span></p><p><img src="pic/6.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>有效单击载入音频的时域波形后（perfect 模式）：</span></p><p><img src="pic/7.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>输入小写字母的 warning：（warning 截图仅展示这一种）</span></p><p><img src="pic/8.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>输入非法字符的 error：（error 截图仅展示这一种）</span></p><p><img src="pic/9.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>载入音频时因转化的字符串过长而使用的弹窗：</span></p><p><img src="pic/10.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>关于界面：</span></p><p><img src="pic/11.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><p><span>文档界面：</span></p><p><img src="pic/12.png" referrerpolicy="no-referrer"></p><div style="page-break-after: always;"></div><h2 id='状态码'><span>状态码</span></h2><p><span>状态码在 error/warning 弹窗的左上角，可对照下文查询。</span></p><p><span>所有状态码均为二位正整数，success 的状态码以 0 开头，warning 的状态码以 1 开头，error 的状态码以 2 开头。</span></p><ul><li><span>00（不应出现）</span></li></ul><p><span>作保留用途。表示所有操作均成功。</span></p><ul><li><span>10（不应出现）</span></li></ul><p><span>作保留用途。表示不属于以下情况的其他警告。</span></p><ul><li><span>11</span></li></ul><p><span>表示载入的外部音频中，用户所点击的某个非静音的连续片段的时长过短（小于</span><code>dtmf.mlapp</code><span>文件中 audioPickTime 属性的值（默认为 0.03s））。程序将自动调小 audioPickTime 属性的值以适应外部音频。</span></p><p><span>解决方案：可以更换外部音频，也可以忽略这一警告。</span></p><ul><li><span>12</span></li></ul><p><span>表示输入的字符串中包含小写字母 abcd。</span></p><p><span>解决方案：可以更改为大写字母，也可以忽略这一警告。</span></p><ul><li><span>20（不应出现）</span></li></ul><p><span>作保留用途。表示不属于以下情况的其他错误。</span></p><ul><li><span>21</span></li></ul><p><span>表示载入的外部音频文件不存在。</span></p><p><span>解决方案：输入有效的音频文件。</span></p><ul><li><span>22</span></li></ul><p><span>表示载入的外部文件不是有效的音频文件。</span></p><p><span>解决方案：输入有效的音频文件。</span></p><ul><li><span>23</span></li></ul><p><span>表示载入的外部音频文件有效，但不是 DTMF 音频。</span></p><p><span>解决方案：使用有效的 DTMF 音频文件。如果您坚持认为文件是 DTMF 音频，则可能是程序判定过于严格，请增大</span><code>dtmf.mlapp</code><span>文件中 deviation 属性的值（默认为 0.1）。</span></p><ul><li><span>24</span></li></ul><p><span>表示输入的字符串中含有 1234567890*#ABCDabcd 以外的字符。</span></p><p><span>解决方案：输入有效的 DTMF 字符串。</span></p><ul><li><span>25</span></li></ul><p><span>表示储存时输入的字符串为空。</span></p><p><span>解决方案：输入有效的 DTMF 字符串。</span></p><ul><li><span>26</span></li></ul><p><span>表示欲储存的位置已有同名文件夹占据。</span></p><p><span>解决方案：更改储存位置或重命名文件夹。</span></p><ul><li><span>27</span></li></ul><p><span>表示欲储存的位置为空。</span></p><p><span>解决方案：输入有效的储存位置。</span></p><ul><li><span>28</span></li></ul><p><span>表示无法向欲储存的位置写入文件。这通常是储存位置设置错误或权限不足导致的。</span></p><p><span>解决方案：更换储存位置（推荐）或使用更高权限运行本程序。</span></p></div></div>
+</body>
+</html>
